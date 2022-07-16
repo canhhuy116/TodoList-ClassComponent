@@ -1,0 +1,37 @@
+.primaryBtn {
+  border: 0;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  width: 70px;
+  height: 80%;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .NameBtn {
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+.AddBtn {
+  background-color: #00bcd4;
+  margin-right: 5px;
+}
+
+.DeleteBtn {
+  background-color: #ff0100;
+  margin-right: 5px;
+}
+
+.EditBtn {
+  background-color: #ffff00;
+  margin: 0 5px;
+}
