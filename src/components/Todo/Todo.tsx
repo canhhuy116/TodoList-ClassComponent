@@ -14,8 +14,8 @@ class Todo extends React.Component<TodoProps, TodoState> {
           <span>Item1</span>
         </div>
         <div className="Buttons">
-          <Button nameBtn="Delete" />
-          <Button nameBtn="Edit" />
+          {/* <Button nameBtn="Delete" />
+          <Button nameBtn="Edit" /> */}
         </div>
       </div>
     );
