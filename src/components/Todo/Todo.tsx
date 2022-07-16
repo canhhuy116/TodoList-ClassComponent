@@ -9,11 +9,16 @@ interface Job {
 
 interface TodoProps {
   todo: Job;
+  onClickDeleteBtn: (job: Job) => void;
 }
 
 interface TodoState {}
 
 class Todo extends React.Component<TodoProps, TodoState> {
+  onClickDelBtn = () => {
+    this.props.onClickDeleteBtn(this.props.todo);
+  };
+
   render() {
     return (
       <div className="todoBox">
@@ -21,8 +26,12 @@ class Todo extends React.Component<TodoProps, TodoState> {
           <span>{this.props.todo.name}</span>
         </div>
         <div className="Buttons">
-          {/* <Button nameBtn="Delete" />
-          <Button nameBtn="Edit" /> */}
+          <Button
+            nameBtn="Delete"
+            onClickBtn={this.onClickDelBtn}
+            isEmptyInput={false}
+          />
+          {/* <Button nameBtn="Edit" /> */}
         </div>
       </div>
     );

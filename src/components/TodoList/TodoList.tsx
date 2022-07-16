@@ -8,6 +8,7 @@ interface Job {
 }
 interface TodoListProps {
   ListJob: Job[];
+  onClickDeleteBtn: (job: Job) => void;
 }
 
 interface TodoListState {}
@@ -17,7 +18,11 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
     return (
       <div className="TodoList">
         {this.props.ListJob.map((todo) => (
-          <Todo key={todo.id} todo={todo} />
+          <Todo
+            key={todo.id}
+            todo={todo}
+            onClickDeleteBtn={this.props.onClickDeleteBtn}
+          />
         ))}
       </div>
     );
