@@ -32,7 +32,7 @@ class App extends React.Component<AppProps, AppState> {
       <div className="App">
         <h2>TO DO LIST</h2>
         <Input onClickAddBtn={this.onClickAddBtn} />
-        <TodoList />
+        <TodoList ListJob={this.state.ListJob} />
       </div>
     );
   }

@@ -14,7 +14,6 @@ interface InputProps {
 
 interface InputState {
   textInput: string;
-  isClickedAddBtn: boolean;
 }
 
 class Input extends React.Component<InputProps, InputState> {
@@ -22,12 +21,12 @@ class Input extends React.Component<InputProps, InputState> {
     super(props);
     this.state = {
       textInput: '',
-      isClickedAddBtn: false,
     };
   }
 
   onClickBtn = () => {
-    this.setState({ isClickedAddBtn: true });
+    // this.setState({ isClickedAddBtn: true });
+    this.setState({ textInput: '' });
     const job = { id: v4(), name: this.state.textInput };
     this.props.onClickAddBtn(job);
   };
@@ -39,11 +38,16 @@ class Input extends React.Component<InputProps, InputState> {
           type="text"
           className="inputBox__input"
           placeholder="Enter to do ..."
+          value={this.state.textInput}
           onChange={(event) => {
             this.setState({ textInput: event.target.value });
           }}
         />
-        <Button nameBtn="Add" onClickBtn={this.onClickBtn} />
+        <Button
+          nameBtn="Add"
+          onClickBtn={this.onClickBtn}
+          isEmptyInput={this.state.textInput === ''}
+        />
       </div>
     );
   }
