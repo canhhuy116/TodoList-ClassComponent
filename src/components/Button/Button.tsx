@@ -5,12 +5,13 @@ interface propsBtn {
   nameBtn: string;
   isEmptyInput: boolean;
   onClickBtn: () => void;
+  className: string;
 }
 
-function Button({ nameBtn, isEmptyInput, onClickBtn }: propsBtn) {
+function Button({ nameBtn, isEmptyInput, onClickBtn, className }: propsBtn) {
   return (
     <button
-      className={`${nameBtn}Btn primaryBtn`}
+      className={`${className} primaryBtn`}
       onClick={onClickBtn}
       disabled={isEmptyInput}
     >

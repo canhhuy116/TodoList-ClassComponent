@@ -6,6 +6,7 @@ import './styleInput.scss';
 interface Job {
   id: string;
   name: string;
+  description: string;
 }
 
 interface InputProps {
@@ -27,7 +28,7 @@ class Input extends React.Component<InputProps, InputState> {
   onClickBtn = () => {
     // this.setState({ isClickedAddBtn: true });
     this.setState({ textInput: '' });
-    const job = { id: v4(), name: this.state.textInput };
+    const job = { id: v4(), name: this.state.textInput, description: ' ' };
     this.props.onClickAddBtn(job);
   };
 
@@ -47,6 +48,7 @@ class Input extends React.Component<InputProps, InputState> {
           nameBtn="Add"
           onClickBtn={this.onClickBtn}
           isEmptyInput={this.state.textInput === ''}
+          className="AddBtn"
         />
       </div>
     );

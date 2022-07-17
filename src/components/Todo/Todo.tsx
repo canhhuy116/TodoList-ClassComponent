@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import './styleTodo.scss';
 
 interface Job {
   id: string;
   name: string;
+  description: string;
 }
 
 interface TodoProps {
@@ -19,6 +21,8 @@ class Todo extends React.Component<TodoProps, TodoState> {
     this.props.onClickDeleteBtn(this.props.todo);
   };
 
+  onClickDetailBtn = () => {};
+
   render() {
     return (
       <div className="todoBox">
@@ -30,8 +34,16 @@ class Todo extends React.Component<TodoProps, TodoState> {
             nameBtn="Delete"
             onClickBtn={this.onClickDelBtn}
             isEmptyInput={false}
+            className="DeleteBtn"
           />
-          {/* <Button nameBtn="Edit" /> */}
+          <Link to={`/${this.props.todo.id}`} className="linkDetail">
+            <Button
+              nameBtn="Detail"
+              isEmptyInput={false}
+              onClickBtn={this.onClickDetailBtn}
+              className="DetailBtn"
+            />
+          </Link>
         </div>
       </div>
     );

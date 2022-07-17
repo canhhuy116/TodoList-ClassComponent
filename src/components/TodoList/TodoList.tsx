@@ -1,10 +1,12 @@
 import * as React from 'react';
+
 import Todo from '../Todo/Todo';
 import './styleTodoList.scss';
 
 interface Job {
   id: string;
   name: string;
+  description: string;
 }
 interface TodoListProps {
   ListJob: Job[];

@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { json } from 'stream/consumers';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import Input from './components/Input/Input';
-import TodoList from './components/TodoList/TodoList';
+import DetailTodo from './components/DetailTodo/DetailTodo';
+import Home from './components/Home/Home';
 
 const TO_DO_LIST_STORAGE = 'TodoList';
 interface Job {
   id: string;
   name: string;
+  description: string;
 }
 
 interface AppProps {}
@@ -16,18 +17,21 @@ interface AppState {
   ListJob: Job[];
 }
 
-const DataStorage = localStorage.getItem(TO_DO_LIST_STORAGE);
-let ListJobStorage: Job[];
-ListJobStorage = [];
-if (DataStorage) {
-  ListJobStorage = JSON.parse(DataStorage);
-}
+const LocalStorage = () => {
+  const DataStorage = localStorage.getItem(TO_DO_LIST_STORAGE);
+  let ListJobStorage: Job[];
+  ListJobStorage = [];
+  if (DataStorage) {
+    ListJobStorage = JSON.parse(DataStorage);
+  }
+  return ListJobStorage;
+};
 
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps | Readonly<AppProps>) {
     super(props);
     this.state = {
-      ListJob: ListJobStorage,
+      ListJob: LocalStorage(),
     };
   }
 
@@ -44,22 +48,48 @@ class App extends React.Component<AppProps, AppState> {
 
   onClickDeleteBtn = (job: Job) => {
     this.setState({
-      ListJob: this.state.ListJob.filter((todo) => {
-        return todo.id !== job.id;
-      }),
+      ListJob: this.state.ListJob.filter((todo) => todo.id !== job.id),
+    });
+  };
+
+  handleChangeInfoJob = (job: Job) => {
+    this.setState({
+      ListJob: this.state.ListJob.map((todo) =>
+        todo.id === job.id ? (todo = job) : todo
+      ),
     });
   };
 
   render() {
     return (
-      <div className="App">
-        <h2>TO DO LIST</h2>
-        <Input onClickAddBtn={this.onClickAddBtn} />
-        <TodoList
-          ListJob={this.state.ListJob}
-          onClickDeleteBtn={this.onClickDeleteBtn}
-        />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                ListJob={this.state.ListJob}
+                onClickAddBtn={this.onClickAddBtn}
+                onClickDeleteBtn={this.onClickDeleteBtn}
+              />
+            }
+          />
+          {this.state.ListJob.map((todo) => {
+            return (
+              <Route
+                key={todo.id}
+                path={`/${todo.id}`}
+                element={
+                  <DetailTodo
+                    job={todo}
+                    handleChangeInfoJob={this.handleChangeInfoJob}
+                  />
+                }
+              />
+            );
+          })}
+        </Routes>
+      </BrowserRouter>
     );
   }
 }
