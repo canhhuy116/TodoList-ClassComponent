@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { memo } from 'react';
 
 import Todo from '../Todo/Todo';
 import './styleTodoList.scss';
@@ -11,7 +12,7 @@ interface Job {
 interface TodoListProps {
   ListJob: Job[];
   onClickDeleteBtn: (job: Job) => void;
-  idJobChangeColor: string;
+  idJobChangeColor: string[];
 }
 
 interface TodoListState {}
@@ -25,7 +26,9 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
             key={todo.id}
             todo={todo}
             onClickDeleteBtn={this.props.onClickDeleteBtn}
-            theme={this.props.idJobChangeColor === todo.id ? 'yellow' : ''}
+            theme={
+              this.props.idJobChangeColor.includes(todo.id) ? 'yellow' : ''
+            }
           />
         ))}
       </div>
@@ -33,4 +36,4 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
   }
 }
 
-export default TodoList;
+export default memo(TodoList);

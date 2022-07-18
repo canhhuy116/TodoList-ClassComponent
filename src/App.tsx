@@ -52,7 +52,7 @@ class App extends React.Component<AppProps, AppState> {
     });
   };
 
-  idJobChangeColor = '';
+  idJobChangeColor = [''];
 
   handleChangeInfoJob = (job: Job) => {
     this.setState({
@@ -60,7 +60,7 @@ class App extends React.Component<AppProps, AppState> {
         todo.id === job.id ? (todo = job) : todo
       ),
     });
-    this.idJobChangeColor = job.id;
+    this.idJobChangeColor.push(job.id);
   };
 
   render() {

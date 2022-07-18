@@ -13,7 +13,7 @@ interface HomeProps {
   ListJob: Job[];
   onClickAddBtn: (job: Job) => void;
   onClickDeleteBtn: (job: Job) => void;
-  idJobChangeColor: string;
+  idJobChangeColor: string[];
 }
 
 interface HomeState {}
