@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import './styleTodo.scss';
+import { Context } from '../ThemeContext/ThemeContext';
 
 interface Job {
   id: string;
@@ -25,27 +26,40 @@ class Todo extends React.Component<TodoProps, TodoState> {
 
   render() {
     return (
-      <div className="todoBox">
-        <div className="Todo">
-          <span>{this.props.todo.name}</span>
-        </div>
-        <div className="Buttons">
-          <Button
-            nameBtn="Delete"
-            onClickBtn={this.onClickDelBtn}
-            isEmptyInput={false}
-            className="DeleteBtn"
-          />
-          <Link to={`/${this.props.todo.id}`} className="linkDetail">
-            <Button
-              nameBtn="Detail"
-              isEmptyInput={false}
-              onClickBtn={this.onClickDetailBtn}
-              className="DetailBtn"
-            />
-          </Link>
-        </div>
-      </div>
+      <Context.Consumer>
+        {(contextTheme) => (
+          <div className="todoBox">
+            <div className="Todo">
+              <span
+                style={{
+                  color:
+                    contextTheme.idJob === this.props.todo.id
+                      ? contextTheme.theme
+                      : '',
+                }}
+              >
+                {this.props.todo.name}
+              </span>
+            </div>
+            <div className="Buttons">
+              <Button
+                nameBtn="Delete"
+                onClickBtn={this.onClickDelBtn}
+                isEmptyInput={false}
+                className="DeleteBtn"
+              />
+              <Link to={`/${this.props.todo.id}`} className="linkDetail">
+                <Button
+                  nameBtn="Detail"
+                  isEmptyInput={false}
+                  onClickBtn={this.onClickDetailBtn}
+                  className="DetailBtn"
+                />
+              </Link>
+            </div>
+          </div>
+        )}
+      </Context.Consumer>
     );
   }
 }
