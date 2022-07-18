@@ -1,4 +1,5 @@
 import React from 'react';
+import InputForm from '../InputForm/InputForm';
 import { Context } from '../ThemeContext/ThemeContext';
 import './styleDetail.scss';
 
@@ -37,6 +38,14 @@ class DetailTodo extends React.Component<DetailTodoProps, DetailTodoState> {
     this.props.handleChangeInfoJob(updateJob);
   };
 
+  changeInput = (name: string, value: string) => {
+    if (name === 'name') {
+      this.setState({ nameJob: value });
+    } else if (name === 'description') {
+      this.setState({ desc: value });
+    }
+  };
+
   render() {
     return (
       <Context.Consumer>
@@ -51,24 +60,18 @@ class DetailTodo extends React.Component<DetailTodoProps, DetailTodoState> {
             <h2>{this.props.job.name}</h2>
             <div className="jobName">
               <label>Enter Job Name:</label>
-              <input
-                type="text"
+              <InputForm
                 name="name"
-                value={this.state.nameJob}
-                onChange={(event) =>
-                  this.setState({ nameJob: event.target.value })
-                }
+                value={this.props.job.name}
+                changeInput={this.changeInput}
               />
             </div>
             <div className="jobDescription">
               <label>Enter Description:</label>
-              <input
-                type="text"
+              <InputForm
                 name="description"
-                value={this.state.desc}
-                onChange={(event) =>
-                  this.setState({ desc: event.target.value })
-                }
+                value={this.props.job.description}
+                changeInput={this.changeInput}
               />
             </div>
             <input type="submit" className="submitBox" />

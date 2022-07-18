@@ -32,10 +32,9 @@ class Todo extends React.Component<TodoProps, TodoState> {
             <div className="Todo">
               <span
                 style={{
-                  color:
-                    contextTheme.idJob === this.props.todo.id
-                      ? contextTheme.theme
-                      : '',
+                  color: contextTheme.idJob.includes(this.props.todo.id)
+                    ? contextTheme.theme
+                    : '',
                 }}
               >
                 {this.props.todo.name}

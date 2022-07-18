@@ -5,13 +5,13 @@ interface ThemeContextProps {
 }
 
 interface ThemeContextState {
-  idJob: string;
+  jobIds: string[];
   theme: string;
 }
 
 const Context = React.createContext({
-  idJob: '',
-  theme: '#000',
+  idJob: [''],
+  theme: '',
   upDateColor: (id: string) => {},
 });
 
@@ -22,7 +22,7 @@ class ThemeContext extends React.Component<
   constructor(props: ThemeContextProps | Readonly<ThemeContextProps>) {
     super(props);
     this.state = {
-      idJob: '',
+      jobIds: [],
       theme: '#000',
     };
 
@@ -30,14 +30,14 @@ class ThemeContext extends React.Component<
   }
 
   changeColor = (id: string) => {
-    this.setState({ idJob: id, theme: 'yellow' });
+    this.setState({ jobIds: [...this.state.jobIds, id], theme: 'yellow' });
   };
 
   render() {
     return (
       <Context.Provider
         value={{
-          idJob: this.state.idJob,
+          idJob: this.state.jobIds,
           theme: this.state.theme,
           upDateColor: this.changeColor,
         }}
