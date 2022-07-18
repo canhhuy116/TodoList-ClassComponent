@@ -11,6 +11,7 @@ interface Job {
 interface TodoListProps {
   ListJob: Job[];
   onClickDeleteBtn: (job: Job) => void;
+  idJobChangeColor: string;
 }
 
 interface TodoListState {}
@@ -24,6 +25,7 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
             key={todo.id}
             todo={todo}
             onClickDeleteBtn={this.props.onClickDeleteBtn}
+            theme={this.props.idJobChangeColor === todo.id ? 'yellow' : ''}
           />
         ))}
       </div>

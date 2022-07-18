@@ -13,6 +13,7 @@ interface HomeProps {
   ListJob: Job[];
   onClickAddBtn: (job: Job) => void;
   onClickDeleteBtn: (job: Job) => void;
+  idJobChangeColor: string;
 }
 
 interface HomeState {}
@@ -26,6 +27,7 @@ class Home extends React.Component<HomeProps, HomeState> {
         <TodoList
           ListJob={this.props.ListJob}
           onClickDeleteBtn={this.props.onClickDeleteBtn}
+          idJobChangeColor={this.props.idJobChangeColor}
         />
       </div>
     );

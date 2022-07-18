@@ -12,6 +12,7 @@ interface Job {
 interface TodoProps {
   todo: Job;
   onClickDeleteBtn: (job: Job) => void;
+  theme: string;
 }
 
 interface TodoState {}
@@ -27,7 +28,7 @@ class Todo extends React.Component<TodoProps, TodoState> {
     return (
       <div className="todoBox">
         <div className="Todo">
-          <span>{this.props.todo.name}</span>
+          <span className={`${this.props.theme}`}>{this.props.todo.name}</span>
         </div>
         <div className="Buttons">
           <Button

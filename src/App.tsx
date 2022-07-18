@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import DetailTodo from './components/DetailTodo/DetailTodo';
 import Home from './components/Home/Home';
@@ -52,12 +52,15 @@ class App extends React.Component<AppProps, AppState> {
     });
   };
 
+  idJobChangeColor = '';
+
   handleChangeInfoJob = (job: Job) => {
     this.setState({
       ListJob: this.state.ListJob.map((todo) =>
         todo.id === job.id ? (todo = job) : todo
       ),
     });
+    this.idJobChangeColor = job.id;
   };
 
   render() {
@@ -71,6 +74,7 @@ class App extends React.Component<AppProps, AppState> {
                 ListJob={this.state.ListJob}
                 onClickAddBtn={this.onClickAddBtn}
                 onClickDeleteBtn={this.onClickDeleteBtn}
+                idJobChangeColor={this.idJobChangeColor}
               />
             }
           />
