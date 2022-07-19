@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import DetailTodo from './components/DetailTodo/DetailTodo';
 import Home from './components/Home/Home';
